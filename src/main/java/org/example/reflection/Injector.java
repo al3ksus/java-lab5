@@ -10,6 +10,8 @@ import java.util.Properties;
 
 public class Injector {
 
+    final static String PROPERTIES_FILE_PATH = "src/main/resources/application.properties";
+
     Properties properties = getProperties();
 
     /**
@@ -44,7 +46,7 @@ public class Injector {
         FileInputStream fis;
         Properties properties = new Properties();
         try {
-            fis = new FileInputStream("src/main/resources/application.properties");
+            fis = new FileInputStream(PROPERTIES_FILE_PATH);
             properties.load(fis);
 
         } catch (IOException e) {
