@@ -21,15 +21,15 @@ public class Injector {
      * @return the same object, but with initialized fields
      * @throws Exception an exception is thrown if incorrect information is written in the properties file
      */
-    public Object inject(Object object) throws Exception {
+    public <T> T inject(T object) throws Exception {
         Field[] fields = object.getClass().getDeclaredFields();
-        Class c;
+        Class<?> c;
         for (Field field : fields) {
             field.setAccessible(true);
             for (Annotation annotation : field.getAnnotations()) {
                 if (annotation.annotationType().equals(AutoInjectable.class)) {
                     c = Class.forName(properties.get(field.getType().getName()).toString());
-                    field.set(object, c.newInstance());
+                    field.set(object, c.getDeclaredConstructor().newInstance());
                 }
             }
         }

@@ -10,7 +10,7 @@ public class InjectorTest {
     @Test
     void injectTest() throws Exception {
         MyClass myClass1 = new MyClass();
-        MyClass myClass2 = (MyClass) (new Injector()).inject(new MyClass());
+        MyClass myClass2 = (new Injector()).inject(new MyClass());
         Assertions.assertThrows(NullPointerException.class, myClass1::foo);
         Assertions.assertDoesNotThrow(myClass2::foo);
     }
